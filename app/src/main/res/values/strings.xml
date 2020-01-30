@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MySQLAndroidCaching3</string>
+    <string name="no_data_available">No data available</string>
+    <string name="firstName">firstName</string>
+    <string name="lastName">lastName</string>
+    <string name="address">address</string>
+    <string name="phone">phone</string>
+</resources>
