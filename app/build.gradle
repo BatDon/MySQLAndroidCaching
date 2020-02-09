@@ -1,5 +1,3 @@
-
-
 apply plugin: 'com.android.application'
 
 
@@ -19,6 +17,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
     }
 }
 
@@ -55,23 +56,6 @@ dependencies {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //
@@ -124,5 +108,4 @@ dependencies {
 //    //implementation 'com.intellij:annotations:+@jar'
 //
 //}
-
 
