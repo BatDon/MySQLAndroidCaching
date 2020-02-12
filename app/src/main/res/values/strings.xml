@@ -5,4 +5,9 @@
     <string name="lastName">lastName</string>
     <string name="address">address</string>
     <string name="phone">phone</string>
+    <string name="firstNameText">First Name</string>
+    <string name="lastNameText">lastName</string>
+    <string name="addressText">address</string>
+    <string name="phoneText">phone</string>
+    <string name="save">save</string>
 </resources>

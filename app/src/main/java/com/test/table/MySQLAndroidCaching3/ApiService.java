@@ -10,14 +10,9 @@ import retrofit2.http.POST;
 
 interface ApiService {
 
-
-
-//    @GET("/")
-    //correct
     @GET("/test/index.php")
     Call<ClientList> getMyJSON();
 
-    //@POST("/node/androidInputClient")
     @POST("/node/androidInputClient")
     Call<Client> clientData(@Body Client client);
 

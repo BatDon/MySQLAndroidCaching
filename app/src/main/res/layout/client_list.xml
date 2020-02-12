@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
@@ -32,7 +31,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="First Name"
+        android:text="@string/firstNameText"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,15 +46,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="16sp"
-        android:text="Last Name"
+        android:text="@string/lastNameText"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstName" />
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-    <!--android:layout_toEndOf="@+id/firstName"
-        android:layout_toRightOf="@+id/firstName"-->
 
     <TextView
         android:id="@+id/address"
@@ -66,7 +61,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="12dp"
         android:textSize="16sp"
-        android:text="address"
+        android:text="@string/addressText"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,18 +76,10 @@
         android:layout_marginRight="8dp"
         android:textSize="16sp"
         android:textColor="#000000"
-        android:text="phone"
+        android:text="@string/phoneText"
         app:layout_constraintBottom_toTopOf="@+id/address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<TextView
-        android:id="@+id/contactNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/salary"
-        android:layout_alignRight="@+id/salary"
-        android:layout_below="@+id/designation"
-        android:text="contact" />-->

@@ -12,9 +12,6 @@ import android.widget.Toast;
 
 import com.test.table.MySqlAndroidCaching3.R;
 
-import retrofit2.Call;
-import retrofit2.Response;
-import android.view.View;
 
 public class AddClient extends AppCompatActivity {
 
@@ -59,10 +56,6 @@ public class AddClient extends AppCompatActivity {
             Toast.makeText(this, "Please first name, last name, phone number and address", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-
-
 
         Intent clientData=new Intent();
         clientData.putExtra(EXTRA_FIRST_NAME,firstNameString);
