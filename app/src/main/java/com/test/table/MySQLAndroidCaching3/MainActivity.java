@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,33 +31,20 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     private static final String TAG = "MainActivity";
-
     private ArrayList<Client> clientList;
     private ProgressDialog pDialog;
     private RecyclerView recyclerView;
     private ClientsAdapter cAdapter;
-
     public static final int ADD_CLIENT_REQUEST = 1;
-
-
     private TextView emptyView;
     private ApiService sg;
     private ApiService sgPost;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //TEST
-//        WebView webView=findViewById(R.id.web_view);
-//        webView.setWebViewClient(new WebViewClient());
-//        webView.loadUrl("http://192.168.1.3/node");
-
 
         pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setMessage("Loading Data.. Please wait...");
@@ -76,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddClient.class);
                 startActivityForResult(intent, ADD_CLIENT_REQUEST);
-                //startActivity(intent);
             }
         });
 
@@ -100,82 +84,41 @@ public class MainActivity extends AppCompatActivity {
             String phoneString = data.getStringExtra(AddClient.EXTRA_PHONE);
             String addressString = data.getStringExtra(AddClient.EXTRA_ADDRESS);
 
-            Toast.makeText(this, "phoneString= " + phoneString, Toast.LENGTH_SHORT).show();
-
             Client client = new Client(5,firstNameString,lastNameString,phoneString,addressString);
-            Call<Client> call1 = sgPost.clientData(client);
-            call1.enqueue(new Callback<Client>() {
-            @Override
-            public void onResponse(@NonNull Call<Client> call1, @NonNull Response<Client> response) {
-                if (response.code() == 404 ) {
-                    Log.d(TAG, "onResponse - Status : " + response.code());
-                    Gson gson = new Gson();
-                    TypeAdapter<Client> adapter = gson.getAdapter(Client.class);
-                    Client registerResponse;
-                    try {
-                        if (response.errorBody() != null) {
-                            registerResponse =
-                                    adapter.fromJson(
-                                            response.errorBody().string());
-                            Log.d("onResponse404",""+registerResponse.getFirstName());
-                        }
+            Call<Client> callPost = sgPost.clientData(client);
+            callPost.enqueue(new Callback<Client>() {
+                @Override
+                public void onResponse(@NonNull Call<Client> callPost, @NonNull Response<Client> response) {
+                       Client client1=null;
+                            if(response.isSuccessful()){
+                                if (response.body()!=null){
+                                    client1=response.body();
+                                }
+                                else{
+                                    client1=null;
+                                    Toast.makeText(MainActivity.this, "Data not parsed correctly", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, "Unsuccessfuly response", Toast.LENGTH_SHORT).show();
+                            }
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Toast.makeText(getApplicationContext(), "Post finished +"+ response.code(), Toast.LENGTH_SHORT).show();
+
                 }
 
-
-
-
-
-                if (response.body()==null){
-                    Log.i("onRespone","response.body()==null");
+                @Override
+                public void onFailure(Call<Client> callPost, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Error posting data: "+t, Toast.LENGTH_SHORT).show();
+                    callPost.cancel();
                 }
-                if(response.isSuccessful()){
-                    Log.i("Response is successful",""+response.body());
-                    Log.i("firstName",response.body().getFirstName());
-                }
-                else{
-                    Log.i("Response nS","");
-                }
-                Client client1 = response.body();
-//                boolean success=false;
-//                success = response.isSuccess();
-                if(client1!=null) {
-                    String responseString = client1.getFirstName();
-                    Toast.makeText(getApplication(), responseString, Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), responseString, Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), responseString, Toast.LENGTH_LONG).show();
-                }
-
-                Toast.makeText(getApplicationContext(), "Post finished", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Post finished +"+ response.code(), Toast.LENGTH_SHORT).show();
-
-            }
-
-        @Override
-        public void onFailure(Call<Client> call1, Throwable t) {
-            Toast.makeText(MainActivity.this, "Error posting data: "+t, Toast.LENGTH_SHORT).show();
-            call1.cancel();
-        }
-    });
-
-
-
-
+            });
         }
     }
 
 
-
-
-
     private void searchApi(String idno) {
         hideKeyboard();
-
-
-
         Call<ClientList> call=sg.getMyJSON();
 
                     call.enqueue(new Callback<ClientList>() {

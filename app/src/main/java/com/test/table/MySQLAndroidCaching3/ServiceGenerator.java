@@ -27,18 +27,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ServiceGenerator {
 
     private static final String TAG = "ServiceGenerator";
-    //private static String BASE_URL;
-    //xxamp is port 80
-    //private static final String BASE_URL ="http://10.0.2.2:80";
-    //private static final String BASE_URL ="http://192.168.1.3:80";
-    //correct
     private static final String BASE_URL ="http://192.168.1.3:80";
-    //private static final String BASE_URL ="https://192.168.1.3:443";
-    //private static final String BASE_URL = "https://mysqlandroidwebsite.000webhostapp.com";
-//    private static final String BASE_URL_POST = "http://localhost:5000";
-//    private static final String BASE_URL_POST = "http://192.168.1.3:5000";
     private static final String BASE_URL_POST = "http://192.168.1.3";
-    //private static final String BASE_URL_POST = "http://10.0.2.2:5000";
     public static final String HEADER_CACHE_CONTROL = "Cache-Control";
     public static final String HEADER_PRAGMA = "Pragma";
     public static boolean isConnected;
@@ -50,7 +40,7 @@ public class ServiceGenerator {
 
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient() {
+    private static Retrofit getClient() {
 
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
@@ -63,7 +53,7 @@ public class ServiceGenerator {
         return retrofit;
     }
 
-    public static Retrofit postClient() {
+    private static Retrofit postClient() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL_POST)
@@ -95,9 +85,6 @@ public class ServiceGenerator {
 
 
     private static Cache cache(){
-//        NetworkConnection inst2= NetworkConnection.getInstance();
-
-        //return new Cache(new File(GlobalApplication.getAppContext().getCacheDir(),"http-cache"), cacheSize);
         return new Cache(new File(GlobalApplication.getAppContext().getCacheDir(),"http-cache"), cacheSize);
     }
 
